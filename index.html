@@ -6,7 +6,7 @@
     <title>Tu Terminal MX - Soluciones de Pago</title>
     <meta name="description" content="Tu Terminal MX ofrece soluciones de pago confiables y eficientes para tu negocio. Descubre nuestras terminales y sus características.">
     <meta name="keywords" content="terminales de pago, soluciones de pago, Tu Terminal MX, terminal móvil, terminal básica, comercio, tecnología de pago, servicios de pago, México">
-    <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/TuTerminalMXRoundel.png" type="image/jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -60,6 +60,8 @@
             font-size: 24px;
             font-weight: bold;
             color: var(--primary-color);
+            z-index: 1001; /* Asegura que el logo esté por encima del menú móvil */
+            margin-left: 15px;
         }
         
         .logo span {
@@ -70,6 +72,31 @@
             margin-right: 10px;
             height: 40px; 
             vertical-align: middle; 
+        }
+        
+        /* Hamburger Menu Button */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 1001; /* Asegura que el botón esté por encima del menú móvil */
+        }
+        
+        .menu-toggle span {
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        /* Navegación */
+        nav {
+            transition: all 0.3s ease;
+            margin-right: 15px;
         }
         
         nav ul {
@@ -438,17 +465,58 @@
         
         /* Responsive */
         @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
+            .menu-toggle {
+                display: flex;
+                margin-right: 15px;
+            }
+            
+            nav {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: white;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                padding: 100px 20px 20px; /* Aumentado el padding superior */
+                transition: right 0.3s ease;
+                z-index: 1000;
+            }
+            
+            nav.active {
+                right: 0;
+                margin-right: 0px;
             }
             
             nav ul {
-                margin-top: 15px;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 15px; /* Margen superior para la lista */
             }
             
             nav ul li {
-                margin-left: 15px;
-                margin-right: 15px;
+                margin: 20px 0; /* Aumentado el margen vertical */
+                width: 100%; /* Ancho completo */
+                text-align: center; /* Texto centrado */
+            }
+            
+            nav ul li a {
+                display: block; /* Hacer que el enlace ocupe todo el ancho */
+                padding: 10px 15px; /* Añadir padding para aumentar el área clicable */
+                font-size: 18px; /* Aumentar tamaño de fuente para mejor legibilidad */
+            }
+
+            /* Estilo para el botón de hamburguesa cuando el menú está activo */
+            .menu-toggle.active span:nth-child(1) {
+                transform: translateY(9px) rotate(45deg);
+            }
+            
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .menu-toggle.active span:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
             }
             
             .banner {
@@ -466,6 +534,22 @@
             .terminals-grid {
                 grid-template-columns: 1fr;
             }
+
+            /* Overlay para cuando el menú está activo */
+            .overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            }
+            
+            .overlay.active {
+                display: block;
+            }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -478,6 +562,11 @@
                 <img src="assets/TuTerminalMXRoundel.png" alt="Logo Tu Terminal MX">
                 Tu Terminal <span>MX</span>
             </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
             <nav>
                 <ul>
                     <li><a href="#inicio">Inicio</a></li>
@@ -488,6 +577,9 @@
             </nav>
         </div>
     </header>
+
+    <!-- Overlay para cuando el menú móvil está activo -->
+    <div class="overlay"></div>
 
     <!-- Banner Section -->
     <section class="banner" id="inicio">
@@ -705,8 +797,28 @@
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
+                
+                // Cerrar el menú móvil si está abierto
+                if (document.querySelector('nav').classList.contains('active')) {
+                    toggleMenu();
+                }
             });
         });
+        
+        // Menú móvil toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav');
+        const overlay = document.querySelector('.overlay');
+        
+        function toggleMenu() {
+            menuToggle.classList.toggle('active');
+            nav.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : 'auto';
+        }
+        
+        menuToggle.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
     </script>
 </body>
 </html>
