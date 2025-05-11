@@ -1,67 +1,712 @@
 <!DOCTYPE html>
-<html lang="es-MX">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu Terminal MX</title>
+    <title>Tu Terminal MX - Soluciones de Pago</title>
+    <meta name="description" content="Tu Terminal MX ofrece soluciones de pago confiables y eficientes para tu negocio. Descubre nuestras terminales y sus características.">
+    <meta name="keywords" content="terminales de pago, soluciones de pago, Tu Terminal MX, terminal móvil, terminal básica, comercio, tecnología de pago, servicios de pago, México">
+    <link rel="icon" href="assets/TuTerminalMXRoundel.png" type="image/jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        :root {
+            --primary-color: rgba(12, 28, 59, 1);
+            --secondary-color: #FFD700; /* Amarillo */
+            --accent-color: #FFB300; /* Amarillo ámbar como acento */
+            --light-color: #FFFFFF; /* Blanco */
+            --dark-color: rgba(12, 28, 59, 0.9); /* Variante del azul oscuro */
+        }
+        * {
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
+        }
+        
+        body {
             color: #333;
+            line-height: 1.6;
+            background-color: var(--light-color);
         }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Header */
         header {
-            background-color: #007bff;
-            color: white;
-            padding: 20px 0;
-            text-align: center;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
         }
-        header h1 {
-            margin: 0;
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
         }
-        section {
-            padding: 20px;
-            text-align: center;
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
         }
-        .cta {
-            margin-top: 20px;
+        
+        .logo span {
+            color: var(--secondary-color);
         }
-        .cta a {
+
+        .logo img {
+            margin-right: 10px;
+            height: 40px; 
+            vertical-align: middle; 
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
             text-decoration: none;
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 16px;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s;
         }
-        .cta a:hover {
-            background-color: #0056b3;
+        
+        nav ul li a:hover {
+            color: var(--secondary-color);
         }
-        footer {
-            background-color: #333;
+        
+        /* Banner */
+        .banner {
+            background: linear-gradient(135deg, var(--primary-color), rgba(12, 28, 59, 0.7));
             color: white;
             text-align: center;
-            padding: 10px 0;
-            margin-top: 20px;
+            padding: 120px 0 80px;
+        }
+        
+        .banner h1 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+        
+        .banner p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #ff7a30;
+            transform: translateY(-3px);
+        }
+        
+        /* Terminales section */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.2rem;
+            color: var(--primary-color);
+        }
+        
+        .terminals-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .terminal-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .terminal-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .terminal-img {
+            width: 100%;
+            height: 300px;
+            background-color: #eee;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .terminal-img img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .terminal-content {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .terminal-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            text-align: center;
+        }
+        
+        .terminal-content p {
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+        
+        .terminal-features {
+            margin: 15px 0;
+        }
+        
+        .feature-list {
+            list-style: none;
+        }
+        
+        .feature-list li {
+            padding: 6px 0;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .feature-list li:before {
+            content: "✓";
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        .terminal-section {
+            margin-bottom: 20px;
+        }
+        
+        .terminal-section h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 8px;
+            display: inline-block;
+        }
+        
+        .ideal-for {
+            background-color: rgba(12, 28, 59, 0.05);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: auto;
+        }
+
+        .ideal-for-list {
+            padding: 6px 0;
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        /* Features */
+        .features {
+            background-color: rgba(12, 28, 59, 0.05);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            padding: 30px 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+        
+        .feature-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        /* Features */
+        .features {
+            background-color: rgba(12, 28, 59, 0.05);
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            padding: 30px 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+        
+        .feature-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        
+        /* CTA */
+        .cta {
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            color: var(--primary-color);
+            text-align: center;
+            padding: 80px 0;
+        }
+        
+        .cta h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            font-weight: 700; /* Peso para título CTA */
+        }
+        
+        .cta p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+        }
+        
+        .cta .btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .cta .btn:hover {
+            background-color: rgba(12, 28, 59, 0.8);
+        }
+        
+        /* Contact */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .contact-icon {
+            font-size: 30px;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+        
+        .contact-item h4 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+            font-weight: 600; /* Peso para títulos de contacto */
+        }
+        
+        .contact-item .social-links a {
+            color: var(--primary-color);
+            transition: color 0.3s, transform 0.3s;
+            display: inline-block;
+        }
+        
+        .contact-item .social-links a:hover {
+            color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-col h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--light-color);
+        }
+        
+        .footer-col ul {
+            list-style: none;
+        }
+        
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-col ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-col ul li a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            color: #aaa;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #555;
+            color: #aaa;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+            }
+            
+            nav ul li {
+                margin-left: 15px;
+                margin-right: 15px;
+            }
+            
+            .banner {
+                padding: 150px 0 60px;
+            }
+            
+            .banner h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .terminals-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <h1>Bienvenido a Tu Terminal MX</h1>
-        <p>Soluciones innovadoras para tu negocio</p>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="assets/TuTerminalMXRoundel.png" alt="Logo Tu Terminal MX">
+                Tu Terminal <span>MX</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#terminales">Terminales</a></li>
+                    <li><a href="#caracteristicas">Características</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
-    <section>
-        <h2>¿Quiénes somos?</h2>
-        <p>En Tu Terminal MX, ofrecemos terminales de pago confiables y accesibles para que tu negocio crezca.</p>
-        <div class="cta">
-            <a href="#contacto">Contáctanos</a>
+
+    <!-- Banner Section -->
+    <section class="banner" id="inicio">
+        <div class="container">
+            <h1>Soluciones de Pago para tu Negocio</h1>
+            <p>En Tu Terminal MX te ofrecemos las mejores terminales de punto de venta con tecnología de punta para impulsar tu negocio.</p>
+            <a href="#terminales" class="btn">Ver Terminales</a>
         </div>
     </section>
+
+    <!-- Terminales Section -->
+    <section class="section" id="terminales">
+        <div class="container">
+            <h2 class="section-title">Nuestras Terminales</h2>
+            <div class="terminals-grid">
+                <div class="terminal-card">
+                    <div class="terminal-img">
+                        <img src="assets/point-smart2.png" alt="Point Smart 2">
+                    </div>
+                    <div class="terminal-content">
+                        <h3>Point Smart 2</h3>
+                        <p>Una solución avanzada para negocios en movimiento con conectividad 4G.</p>
+                        
+                        <div class="terminal-section">
+                            <h4>Beneficios</h4>
+                            <ul class="feature-list">
+                                <li>Acepta débito, crédito, código QR</li>
+                                <li>Incluye cuenta digital y tarjeta gratuita</li>
+                                <li>3 años de garantía</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="terminal-section">
+                            <h4>Características</h4>
+                            <ul class="feature-list">
+                                <li>Plan de datos 4G gratis y WiFi</li>
+                                <li>No necesita del celular para cobrar</li>
+                                <li>Acepta pagos con Chip, banda y sin contacto</li>
+                                <li>Hasta 3 días de batería</li>
+                                <li>Imprime comprobantes y los envía por e-mail y SMS</li>
+                                <li>Rollos de papel gratis para siempre</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="ideal-for">
+                            <h4>Ideal para</h4>
+                            <ul class="ideal-for-list">
+                                <li>Clientes con negocios pequeños y medianos</li>
+                                <li>Clientes que a diario hacen una gran cantidad de transacciones</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="terminal-card">
+                    <div class="terminal-img">
+                        <img src="assets/point-mini.png" alt="Point Mini">
+                    </div>
+                    <div class="terminal-content">
+                        <h3>Point Mini</h3>
+                        <p>Solución confiable y económica para comercios establecidos.</p>
+                        
+                        <div class="terminal-section">
+                            <h4>Beneficios</h4>
+                            <ul class="feature-list">
+                                <li>Acepta débito, crédito, código QR</li>
+                                <li>Incluye cuenta digital y tarjeta gratuita</li>
+                                <li>1 año de garantía</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="terminal-section">
+                            <h4>Características</h4>
+                            <ul class="feature-list">
+                                <li>Conexión Bluetooth con celular*</li>
+                                <li>Acepta pagos con Chip y sin contacto</li>
+                                <li>Duración de batería entre 8 y 15 horas</li>
+                                <li>Envía comprobantes por SMS</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="ideal-for">
+                            <h4>Ideal para</h4>
+                            <ul class="ideal-for-list">
+                                <li>Clientes con emprendimientos individuales</li>
+                                <li>Clientes con negocios pequeños y medianos</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Características Section -->
+    <section class="section features" id="caracteristicas">
+        <div class="container">
+            <h2 class="section-title">Características de Nuestras Terminales</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="feature-title">Procesamiento Rápido</h3>
+                    <p>Transacciones aprobadas en segundos para no hacer esperar a tus clientes.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="feature-title">Seguridad Garantizada</h3>
+                    <p>Cumplimos con los más altos estándares de seguridad para proteger los datos.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <h3 class="feature-title">Múltiples Conexiones</h3>
+                    <p>WiFi, 4G, Bluetooth y otras opciones de conectividad para tu conveniencia.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <h3 class="feature-title">Todas las Tarjetas</h3>
+                    <p>Acepta todas las tarjetas bancarias y métodos de pago sin contacto.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta">
+        <div class="container">
+            <h2>¿Listo para impulsar tu negocio?</h2>
+            <p>Contáctanos hoy mismo y obtén una terminal adaptada a las necesidades específicas de tu negocio.</p>
+            <a href="#contacto" class="btn">Solicitar Información</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contacto">
+        <div class="container">
+            <h2 class="section-title">Contáctanos</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-hashtag"></i>
+                    </div>
+                    <h4>Redes Sociales</h4>
+                    <div class="social-links" style="margin-top: 10px;">
+                        <a href="https://www.facebook.com/profile.php?id=61575892119861" target="_blank" rel="noopener noreferrer" style="margin: 0 8px; font-size: 22px;"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/tuterminalmx/" target="_blank" rel="noopener noreferrer" style="margin: 0 8px; font-size: 22px;"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h4>Email</h4>
+                    <p>tuterminalmx@gmail.com</p>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h4>Ubicación</h4>
+                    <p>Agua Prieta, Sonora, México</p>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h4>Horario</h4>
+                    <p>Lun-Vie: 2pm - 6pm</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Tu Terminal MX. Todos los derechos reservados.</p>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-col">
+                    <h4>Tu Terminal MX</h4>
+                    <p>Soluciones de pago confiables para impulsar tu negocio.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=61575892119861" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/tuterminalmx/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Tu Terminal MX. Todos los derechos reservados.</p>
+            </div>
+        </div>
     </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
